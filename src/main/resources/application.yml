@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: political-news-service
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5433/political_news
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  ai:
+    vertex:
+      ai:
+        gemini:
+          project-id: ${GOOGLE_CLOUD_PROJECT_ID:bot-teste-433918}
+          location: ${GOOGLE_CLOUD_LOCATION:us-central1}
+          chat:
+            options:
+              model: gemini-2.0-flash
+    api-key: ${GEMINI_API_KEY:}
+
+  security:
+    user:
+      name: user
+      password: password
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.springframework.ai: DEBUG
